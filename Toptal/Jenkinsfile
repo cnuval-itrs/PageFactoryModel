@@ -1,15 +1,8 @@
 pipeline {
-
-  agent {
-    node {
-      label 'master'
-    }
-  }
+  agent any
 
   options {
     ansiColor('xterm')
-    timestamps()
-    buildDiscarder(logRotator(numToKeepStr: '10'))
   }
 
   stages {
