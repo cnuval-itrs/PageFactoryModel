@@ -1,0 +1,24 @@
+pipeline {
+
+  agent {
+    node {
+      label 'master'
+    }
+  }
+
+  options {
+    ansiColor('xterm')
+    timestamps()
+    buildDiscarder(logRotator(numToKeepStr: '10'))
+  }
+
+  stages {
+    stage ('Run tests and code analysis') {
+        steps {
+            withMaven(maven: "MAVEN_381", mavenSettingsConfig: 'maven-settings') {
+                bat "mvn clean test"
+             }
+        }
+    }
+  }
+
